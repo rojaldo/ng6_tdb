@@ -9,11 +9,13 @@ import { RequestService} from './request.service';
 import { MainComponent } from './main/main.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
+import { CardComponent } from './card/card.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    MainComponent
+    MainComponent,
+    CardComponent
   ],
   imports: [
     BrowserModule, HttpClientModule, NgbModule.forRoot(), FormsModule
