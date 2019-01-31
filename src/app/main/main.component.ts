@@ -10,7 +10,7 @@ import { Card } from '../model/card';
 export class MainComponent implements OnInit {
 
   result: any;
-  card: Card;
+  cards: Card[] = [];
 
   constructor(public service: RequestService) { }
 
@@ -19,7 +19,7 @@ export class MainComponent implements OnInit {
   }
 
   getApiInfo() {
-    this.service.getRequest('https://opentdb.com/api.php?amount=1').subscribe(
+    this.service.getRequest('https://opentdb.com/api.php?amount=10').subscribe(
       data => this.processResult(data),
       error => this.processError(error),
       () => this.processFinal()
@@ -29,7 +29,9 @@ export class MainComponent implements OnInit {
   processResult(data: any) {
     console.log(data);
     this.result = data;
-    this.card = new Card(this.result.results[0]);
+    for (let index = 0; index < this.result.results.length; index++) {
+      this.cards.push(new Card(this.result.results[index]));
+    }
   }
 
   processError(error: any) {
