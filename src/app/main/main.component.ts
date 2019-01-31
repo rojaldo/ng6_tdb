@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { RequestService } from '../request.service';
+import { Card } from '../model/card';
 
 @Component({
   selector: 'app-main',
@@ -9,6 +10,7 @@ import { RequestService } from '../request.service';
 export class MainComponent implements OnInit {
 
   result: any;
+  card: Card;
 
   constructor(public service: RequestService) { }
 
@@ -17,7 +19,7 @@ export class MainComponent implements OnInit {
   }
 
   getApiInfo() {
-    this.service.getRequest('https://api.punkapi.com/v2/beers').subscribe(
+    this.service.getRequest('https://opentdb.com/api.php?amount=1').subscribe(
       data => this.processResult(data),
       error => this.processError(error),
       () => this.processFinal()
@@ -27,6 +29,7 @@ export class MainComponent implements OnInit {
   processResult(data: any) {
     console.log(data);
     this.result = data;
+    this.card = new Card(this.result.results[0]);
   }
 
   processError(error: any) {
